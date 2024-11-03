@@ -976,3 +976,37 @@ export default class EnigmaEncoder extends Encoder {
     return names.map(name => EnigmaEncoder.getRotor(name))
   }
 }
+
+const enigmaEncoder = new EnigmaEncoder()
+enigmaEncoder.applyModel('M3')
+const content = "mftrd fzypz fevha jwmzh idzdb pislf xteif hqmvn ataz"; // const result = await enigmaEncoder.encode(content)
+
+enigmaEncoder.setSettingValue('plugboard', '')
+enigmaEncoder.setSettingValue('reflector', 'UKW-B')
+// enigmaEncoder.setSettingValue('plugboard', 'bq cr di ej kw mt os px uz gh')
+enigmaEncoder.setSettingValue('rotor1', 'VI')
+enigmaEncoder.setSettingValue('rotor2', 'I')
+enigmaEncoder.setSettingValue('rotor3', 'III')
+
+for (let i = 1; i < 27; i++) {
+  for (let j = 1; j < 27; j++) {
+    for (let k = 1; k < 27; k++) {
+      for (let l = 1; l < 27; l++) {
+        for (let m = 1; m < 27; m++) {
+          for (let n = 1; n < 27; n++) {
+            enigmaEncoder.setSettingValue('position1', i)
+            enigmaEncoder.setSettingValue('position2', j)
+            enigmaEncoder.setSettingValue('ring1', k)
+            enigmaEncoder.setSettingValue('ring2', l)
+            enigmaEncoder.setSettingValue('ring3', m)
+            enigmaEncoder.setSettingValue('position3', n)
+            const codepts = await enigmaEncoder.decode(content);
+            const str = await codepts.toString();
+            const result  = str.split(' ').join('')
+            console.log(result,i,j,k,l,m,n)
+          }
+        }
+      }
+    }
+  }
+}
